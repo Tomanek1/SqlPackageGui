@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlPackageGui.WPF", "SqlPackageGui.WPF\SqlPackageGui.WPF.csproj", "{BCC9459F-8569-4865-AF3C-25A5A6CF589B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DB29DE4C-4FD8-47A1-9D5D-FAEEEF985AF3}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCC9459F-8569-4865-AF3C-25A5A6CF589B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCC9459F-8569-4865-AF3C-25A5A6CF589B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCC9459F-8569-4865-AF3C-25A5A6CF589B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCC9459F-8569-4865-AF3C-25A5A6CF589B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC888A1C-BBC0-43F9-9013-C866F94CA40A}
+	EndGlobalSection
+EndGlobal
