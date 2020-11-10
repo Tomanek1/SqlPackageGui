@@ -29,8 +29,12 @@ namespace SqlPackageGui.WPF
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string act = @"C:\Users\Administrator\Desktop\150\sqlpackage.exe";
-            string arg = @" /action:Script /outputPath:C:\\test.txt /p:GenerateSmartDefaults=True /SourceFile:"+ TbDacPacPath.Text + @" /TargetDatabaseName:Eshop /TargetServerName:"".\SQLProduction""";
-            //Process p = new Process();
+            string arg = "/action:Script "
+                        + "/outputPath:C:\\test.txt "
+                        + "/p:GenerateSmartDefaults=True "
+                        + "/SourceFile:" + TbDacPacPath.Text + " "
+                        + "/TargetDatabaseName:" + TargetDatabaseName.Text + " "
+                        + "/TargetServerName:" + TargetServerName.Text;
 
             Process.Start(act, arg);
         }

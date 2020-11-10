@@ -10,8 +10,10 @@
         <StackPanel>
             <Label>Target TbDacPacPath</Label>
             <TextBox x:Name="TbDacPacPath" Text="C:\Users\Administrator\Desktop\HudebniSvet.Sql.dacpac" />
-            <Label>Target</Label>
-            <TextBox x:Name="Tb" />
+            <Label>TargetServerName</Label>
+            <TextBox x:Name="TargetServerName" Text=".\SQLProduction" />
+            <Label>TargetDatabaseName</Label>
+            <TextBox x:Name="TargetDatabaseName" Text="Eshop" />
             <Button Content="Execute" Click="Button_Click" />
         </StackPanel>
     </Grid>
