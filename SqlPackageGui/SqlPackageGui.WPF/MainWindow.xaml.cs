@@ -28,9 +28,9 @@ namespace SqlPackageGui.WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string act = @"C:\Users\Administrator\Desktop\150\sqlpackage.exe";
+            string act = tbCmdPath.Text;
             string arg = "/action:Script "
-                        + "/outputPath:C:\\test.txt "
+                        + "/outputPath:" + OutputPath + " "
                         + "/p:GenerateSmartDefaults=True "
                         + "/SourceFile:" + TbDacPacPath.Text + " "
                         + "/TargetDatabaseName:" + TargetDatabaseName.Text + " "
