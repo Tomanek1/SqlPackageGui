@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="SqlPackageGui.WPF.Tabs.Script_Tab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SqlPackageGui.WPF.Tabs"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <Label>Console Path</Label>
+        <TextBox x:Name="tbCmdPath" Text="C:\Users\Administrator\Desktop\150\sqlpackage.exe" Margin="0 0 0 10" />
+        <Label>Target</Label>
+        <TextBox x:Name="TbDacPacPath" Text="C:\Users\Administrator\Desktop\file.Sql.dacpac" />
+        <Label>TargetServerName</Label>
+        <TextBox x:Name="TargetServerName" Text=".\SQLProduction" />
+        <Label>TargetDatabaseName</Label>
+        <TextBox x:Name="TargetDatabaseName" Text="Eshop" />
+        <Label>OutputPath</Label>
+        <TextBox x:Name="OutputPath" Text="C:\\PublishScript.sql" />
+        <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
+            <StackPanel>
+                <Label>Optional param 1</Label>
+                <TextBox Text="Val" />
+            </StackPanel>
+        </Expander>
+        <Button Content="Execute" Click="Btn_Script_Click" />
+        <TextBox VerticalScrollBarVisibility="Visible" x:Name="tbOutput" Height="181"/>
+    </StackPanel>
+</UserControl>

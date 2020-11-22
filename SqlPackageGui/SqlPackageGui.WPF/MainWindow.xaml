@@ -4,41 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SqlPackageGui.WPF"
+		xmlns:tab="clr-namespace:SqlPackageGui.WPF.Tabs"        
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <StackPanel Orientation="Vertical">
-        <Label>Console Path</Label>
-        <TextBox x:Name="tbCmdPath" Text="C:\Users\Administrator\Desktop\150\sqlpackage.exe" Margin="0 0 0 10" />
+        <!-- https://docs.microsoft.com/en-us/sql/tools/sqlpackage?view=sql-server-ver15 -->
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="4">
             <TabItem IsEnabled="False" Header="Actions : ">
             </TabItem>
             <TabItem x:Name="tbScript" Header="Script">
-                <StackPanel>
-                    <Label>Target TbDacPacPath</Label>
-                    <TextBox x:Name="TbDacPacPath" Text="C:\Users\Administrator\Desktop\HudebniSvet.Sql.dacpac" />
-                    <Label>TargetServerName</Label>
-                    <TextBox x:Name="TargetServerName" Text=".\SQLProduction" />
-                    <Label>TargetDatabaseName</Label>
-                    <TextBox x:Name="TargetDatabaseName" Text="Eshop" />
-                    <Label>OutputPath</Label>
-                    <TextBox x:Name="OutputPath" Text="C:\\test.sql" />
-                    <Button Content="Execute" Click="Button_Click" />
-                </StackPanel>
+                <tab:Script_Tab></tab:Script_Tab>
             </TabItem>
             <TabItem x:Name="tbPublish" Header="Publish">
-                <Grid>
-
-                </Grid>
+                <tab:Publish_Tab></tab:Publish_Tab>
             </TabItem>
             <TabItem x:Name="tbDeployReport" Header="DeployReport">
-                <Grid>
-
-                </Grid>
+                <tab:DeployReport_Tab></tab:DeployReport_Tab>
             </TabItem>
             <TabItem x:Name="tbDriftReport" Header="DriftReport">
-                <Grid>
-
-                </Grid>
+                <tab:Drift_Tab></tab:Drift_Tab>
             </TabItem>
         </TabControl>
     </StackPanel>
