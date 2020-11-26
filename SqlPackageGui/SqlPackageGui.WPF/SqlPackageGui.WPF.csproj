@@ -6,4 +6,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SqlPackageGui.ApplicationLogic\SqlPackageGui.ApplicationLogic.csproj" />
+  </ItemGroup>
+
 </Project>

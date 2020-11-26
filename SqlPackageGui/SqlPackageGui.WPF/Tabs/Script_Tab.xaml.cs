@@ -33,8 +33,12 @@ namespace SqlPackageGui.WPF.Tabs
             string arg = "/action:Script "
                         + "/OutputPath:" + OutputPath.Text + " "
                         + "/p:GenerateSmartDefaults=True "
-                        + "/SourceFile:" + TbDacPacPath.Text + " "
-                        + "/TargetDatabaseName:" + TargetDatabaseName.Text + " "
+                        + "/SourceFile:" + TbDacPacPath.Text + " ";
+
+            if (CbConnectionString.IsChecked.HasValue && CbConnectionString.IsChecked.Value)
+                arg += "/TargetConnectionString:" + TbConnectionString.Text + " ";
+            else
+                arg += "/TargetDatabaseName:" + TargetDatabaseName.Text + " "
                         + "/TargetServerName:" + TargetServerName.Text;
 
             this.proc.StartInfo = new ProcessStartInfo
@@ -64,6 +68,31 @@ namespace SqlPackageGui.WPF.Tabs
                 var value = (e.Data ?? "") + Environment.NewLine;
                 tbOutput.AppendText(value);
             }));
+        }
+
+        private void CbConnectionString_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CbConnectionString.IsChecked.HasValue && CbConnectionString.IsChecked.Value)
+            {
+                TargetDatabaseName.Visibility = Visibility.Collapsed;
+                LbTargetDatabaseName.Visibility = Visibility.Collapsed;
+                TargetServerName.Visibility = Visibility.Collapsed;
+                LbTargetServerName.Visibility = Visibility.Collapsed;
+
+                TbConnectionString.Visibility = Visibility.Visible;
+                LbConnectionString.Visibility = Visibility.Visible;
+            }
+            else
+            {
+
+                TargetDatabaseName.Visibility = Visibility.Visible;
+                LbTargetDatabaseName.Visibility = Visibility.Visible;
+                TargetServerName.Visibility = Visibility.Visible;
+                LbTargetServerName.Visibility = Visibility.Visible;
+
+                TbConnectionString.Visibility = Visibility.Collapsed;
+                LbConnectionString.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
