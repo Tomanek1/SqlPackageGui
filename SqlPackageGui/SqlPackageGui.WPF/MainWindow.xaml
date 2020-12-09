@@ -7,7 +7,7 @@
 		xmlns:tab="clr-namespace:SqlPackageGui.WPF.Tabs"        
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel Orientation="Vertical">
+    <DockPanel LastChildFill="True">
         <!-- https://docs.microsoft.com/en-us/sql/tools/sqlpackage?view=sql-server-ver15 -->
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="4">
             <TabItem IsEnabled="False" Header="Actions : ">
@@ -25,5 +25,5 @@
                 <tab:Drift_Tab></tab:Drift_Tab>
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </DockPanel>
 </Window>

@@ -6,25 +6,26 @@
              xmlns:local="clr-namespace:SqlPackageGui.WPF.Tabs"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <Label>Console Path</Label>
-        <TextBox x:Name="tbCmdPath" Text="C:\Users\Administrator\Desktop\150\sqlpackage.exe" Margin="0 0 0 10" />
-        
-        <Label>SourceFile</Label>
-        <TextBox x:Name="TbSourceFile" Text="C:\Users\Administrator\Desktop\file.dacpac" />
-        <Label>TargetServerName</Label>
-        <TextBox x:Name="TargetServerName" Text=".\SQLProduction" />
-        <Label>TargetDatabaseName</Label>
-        <TextBox x:Name="TargetDatabaseName" Text="Eshop" />
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top" Margin="0,0,0,5">
+            <Label>Console Path</Label>
+            <TextBox x:Name="tbCmdPath" Text="C:\Users\Administrator\Desktop\150\sqlpackage.exe" Margin="0 0 0 10" />
 
-        <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
-            <StackPanel>
-                <Label>Optional param 1</Label>
-                <TextBox Text="Val" />
-            </StackPanel>
-        </Expander>
-        <Button Content="Execute" Click="Btn_Publish_Click" />
-        <TextBox VerticalScrollBarVisibility="Visible" x:Name="tbOutput" Height="181"/>
+            <Label>SourceFile</Label>
+            <TextBox x:Name="TbSourceFile" Text="C:\Users\Administrator\Desktop\file.dacpac" />
+            <Label>TargetServerName</Label>
+            <TextBox x:Name="TargetServerName" Text=".\SQLProduction" />
+            <Label>TargetDatabaseName</Label>
+            <TextBox x:Name="TargetDatabaseName" Text="Eshop" />
 
-    </StackPanel>
+            <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
+                <StackPanel>
+                    <Label>Optional param 1</Label>
+                    <TextBox Text="Val" />
+                </StackPanel>
+            </Expander>
+            <Button Content="Execute" Click="Btn_Publish_Click" />
+        </StackPanel>
+        <TextBox VerticalScrollBarVisibility="Visible" x:Name="tbOutput" />
+    </DockPanel>
 </UserControl>
