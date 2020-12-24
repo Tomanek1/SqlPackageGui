@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:SqlPackageGui.WPF"
 		xmlns:tab="clr-namespace:SqlPackageGui.WPF.Tabs"        
         mc:Ignorable="d"
+        Closed="Window_Closed"
+        Initialized="Window_Initialized"
         Title="MainWindow" Height="450" Width="800">
     <DockPanel LastChildFill="True">
         <!-- https://docs.microsoft.com/en-us/sql/tools/sqlpackage?view=sql-server-ver15 -->
@@ -13,7 +15,7 @@
             <TabItem IsEnabled="False" Header="Actions : ">
             </TabItem>
             <TabItem x:Name="tbScript" Header="Script">
-                <tab:Script_Tab></tab:Script_Tab>
+                <tab:Script_Tab DataContext="{Binding TabScriptVm}"></tab:Script_Tab>
             </TabItem>
             <TabItem x:Name="tbPublish" Header="Publish">
                 <tab:Publish_Tab></tab:Publish_Tab>

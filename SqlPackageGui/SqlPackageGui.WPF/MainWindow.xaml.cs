@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SqlPackageGui.WPF.ViewModels.Windows;
+using System;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace SqlPackageGui.WPF
 {
@@ -21,9 +11,37 @@ namespace SqlPackageGui.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        WindowVM window;
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        private void Window_Initialized(object sender, EventArgs e)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(WindowVM));
+            using (Stream stream = new FileStream("C:\\data.xml", FileMode.OpenOrCreate))
+            {
+                if (stream.Length == 0)
+                    window = new WindowVM();
+                else
+                    window = (WindowVM)ser.Deserialize(stream);
+
+                window.Bind();
+                this.DataContext = window;
+            }
+        }
+
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(WindowVM));
+            using (Stream stream = new FileStream("C:\\data.xml", FileMode.OpenOrCreate))
+            {
+                ser.Serialize(stream, window);
+            }
+        }
+
     }
 }

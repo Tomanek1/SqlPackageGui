@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SqlPackageGui.WPF.Tabs"
+             xmlns:common="clr-namespace:SqlPackageGui.WPF.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -14,8 +15,7 @@
     </UserControl.Resources>
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top" Margin="0,0,0,5">
-            <Label>Console Path</Label>
-            <TextBox x:Name="tbCmdPath" Text="C:\Users\Administrator\Desktop\150\sqlpackage.exe" Margin="0 0 0 10" />
+            <common:Common x:Name="common"></common:Common>
             <GroupBox >
                 <GroupBox.Header>
                     <CheckBox Grid.Row="1" Grid.Column="1" x:Name="CbConnectionString" Content="Use ConnectionString" Checked="CbConnectionString_Checked" Unchecked="CbConnectionString_Checked"></CheckBox>
@@ -35,7 +35,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" x:Name="LbConnectionString" Visibility="Collapsed">ConnectionString</Label>
-                    <TextBox Grid.Row="1" Grid.Column="0" x:Name="TbConnectionString" Text="My Connection String;" Visibility="Collapsed" />
+                    <TextBox Grid.Row="1" Grid.Column="0" x:Name="TbConnectionString" Text="{Binding Connection.ConnectionString}" Visibility="Collapsed" />
                     <Label Grid.Row="2" Grid.Column="1" x:Name="LbTargetServerName">TargetServerName</Label>
                     <TextBox Grid.Row="3" Grid.Column="1" x:Name="TargetServerName" Text=".\SQLProduction" />
                     <Label Grid.Row="2" Grid.Column="0" x:Name="LbTargetDatabaseName">TargetDatabaseName</Label>
@@ -43,9 +43,9 @@
                 </Grid>
             </GroupBox>
             <Label>Target</Label>
-            <TextBox x:Name="TbDacPacPath" Text="C:\Users\Administrator\Desktop\file.Sql.dacpac" />
+            <TextBox x:Name="TbDacPacPath" Text="{Binding Path=Target}" />
             <Label>OutputPath</Label>
-            <TextBox x:Name="OutputPath" Text="C:\\PublishScript.sql" />
+            <TextBox x:Name="OutputPath" Text="{Binding Path=OutputPath}" />
             <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
                 <StackPanel>
                     <Label>Optional param 1</Label>
