@@ -12,7 +12,7 @@ namespace SqlPackageGui.WPF
     public partial class MainWindow : Window
     {
         WindowVM window;
-
+        string serializationFile = @"C:\\sqlconsolegui\data.xml";
         public MainWindow()
         {
             InitializeComponent();
@@ -21,7 +21,9 @@ namespace SqlPackageGui.WPF
         private void Window_Initialized(object sender, EventArgs e)
         {
             XmlSerializer ser = new XmlSerializer(typeof(WindowVM));
-            using (Stream stream = new FileStream("C:\\data.xml", FileMode.OpenOrCreate))
+            if (Directory.Exists(@"C:\\SqlConsoleGui"))
+                Directory.CreateDirectory(@"C:\\SqlConsoleGui");
+            using (Stream stream = new FileStream(serializationFile, FileMode.OpenOrCreate))
             {
                 if (stream.Length == 0)
                     window = new WindowVM();
@@ -37,7 +39,7 @@ namespace SqlPackageGui.WPF
         private void Window_Closed(object sender, EventArgs e)
         {
             XmlSerializer ser = new XmlSerializer(typeof(WindowVM));
-            using (Stream stream = new FileStream("C:\\data.xml", FileMode.OpenOrCreate))
+            using (Stream stream = new FileStream(serializationFile, FileMode.OpenOrCreate))
             {
                 ser.Serialize(stream, window);
             }

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using SqlPackageGui.ApplicationLogic;
 
 namespace SqlPackageGui.WPF.Tabs
 {
@@ -10,8 +11,8 @@ namespace SqlPackageGui.WPF.Tabs
     /// </summary>
     public partial class Script_Tab : UserControl
     {
-        Process proc = new Process();
-
+        //Process proc = new Process();
+        SqlPackage sqlPackage = new SqlPackage();
         public Script_Tab()
         {
             InitializeComponent();
@@ -19,37 +20,15 @@ namespace SqlPackageGui.WPF.Tabs
 
         private void Btn_Script_Click(object sender, RoutedEventArgs e)
         {
-            proc = new Process();
-            string act = common.tbCmdPath.Text;
-            string arg = "/action:Script "
-                        + "/OutputPath:" + OutputPath.Text + " "
-                        + "/p:GenerateSmartDefaults=True "
-                        + "/SourceFile:" + TbDacPacPath.Text + " ";
-
+            sqlPackage.ConsoleLocation = common.tbCmdPath.Text;
+            //proc = new Process();
+            Connection conn = new Connection();
             if (CbConnectionString.IsChecked.HasValue && CbConnectionString.IsChecked.Value)
-                arg += "/TargetConnectionString:" + TbConnectionString.Text + " ";
-            else
-                arg += "/TargetDatabaseName:" + TargetDatabaseName.Text + " "
-                        + "/TargetServerName:" + TargetServerName.Text;
+                conn.ConnectionString = TbConnectionString.Text;
+            conn.TargetDatabaseName = TargetDatabaseName.Text;
+            conn.TargetServerName = TargetServerName.Text;
 
-            this.proc.StartInfo = new ProcessStartInfo
-            {
-                FileName = act,
-                Arguments = arg,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardInput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true
-            };
-
-            proc.OutputDataReceived += new DataReceivedEventHandler(this.Proc_ErrorDataReceived);
-            proc.ErrorDataReceived += new DataReceivedEventHandler(this.Proc_ErrorDataReceived);
-
-            proc.Start();
-            proc.BeginOutputReadLine();
-            proc.BeginErrorReadLine();
-            proc.WaitForExit();
+            sqlPackage.Execute("Script", OutputPath.Text, TbDacPacPath.Text, conn, Proc_ErrorDataReceived);
         }
 
         private void Proc_ErrorDataReceived(object sender, DataReceivedEventArgs e)
