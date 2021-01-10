@@ -23,12 +23,12 @@ namespace SqlPackageGui.WPF.Tabs
             sqlPackage.ConsoleLocation = common.tbCmdPath.Text;
             //proc = new Process();
             Connection conn = new Connection();
-            if (CbConnectionString.IsChecked.HasValue && CbConnectionString.IsChecked.Value)
-                conn.ConnectionString = TbConnectionString.Text;
-            conn.TargetDatabaseName = TargetDatabaseName.Text;
-            conn.TargetServerName = TargetServerName.Text;
+            if (common.CbConnectionString.IsChecked.HasValue && common.CbConnectionString.IsChecked.Value)
+                conn.ConnectionString = common.TbConnectionString.Text;
+            conn.TargetDatabaseName = common.TargetDatabaseName.Text;
+            conn.TargetServerName = common.TargetServerName.Text;
 
-            sqlPackage.Execute("Script", OutputPath.Text, TbDacPacPath.Text, conn, Proc_ErrorDataReceived);
+            sqlPackage.Execute("Script", OutputPath.Text, common.TbDacPacPath.Text, conn, Proc_ErrorDataReceived);
         }
 
         private void Proc_ErrorDataReceived(object sender, DataReceivedEventArgs e)
@@ -40,29 +40,5 @@ namespace SqlPackageGui.WPF.Tabs
             }));
         }
 
-        private void CbConnectionString_Checked(object sender, RoutedEventArgs e)
-        {
-            if (CbConnectionString.IsChecked.HasValue && CbConnectionString.IsChecked.Value)
-            {
-                TargetDatabaseName.Visibility = Visibility.Collapsed;
-                LbTargetDatabaseName.Visibility = Visibility.Collapsed;
-                TargetServerName.Visibility = Visibility.Collapsed;
-                LbTargetServerName.Visibility = Visibility.Collapsed;
-
-                TbConnectionString.Visibility = Visibility.Visible;
-                LbConnectionString.Visibility = Visibility.Visible;
-            }
-            else
-            {
-
-                TargetDatabaseName.Visibility = Visibility.Visible;
-                LbTargetDatabaseName.Visibility = Visibility.Visible;
-                TargetServerName.Visibility = Visibility.Visible;
-                LbTargetServerName.Visibility = Visibility.Visible;
-
-                TbConnectionString.Visibility = Visibility.Collapsed;
-                LbConnectionString.Visibility = Visibility.Collapsed;
-            }
-        }
     }
 }

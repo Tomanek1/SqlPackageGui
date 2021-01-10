@@ -21,8 +21,8 @@ namespace SqlPackageGui.WPF
         private void Window_Initialized(object sender, EventArgs e)
         {
             XmlSerializer ser = new XmlSerializer(typeof(WindowVM));
-            if (Directory.Exists(@"C:\\SqlConsoleGui"))
-                Directory.CreateDirectory(@"C:\\SqlConsoleGui");
+            if (!Directory.Exists(@"C:\\SqlConsoleGui\\"))
+                Directory.CreateDirectory(@"C:\\SqlConsoleGui\\");
             using (Stream stream = new FileStream(serializationFile, FileMode.OpenOrCreate))
             {
                 if (stream.Length == 0)

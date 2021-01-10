@@ -3,20 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:common="clr-namespace:SqlPackageGui.WPF.UserControls"
              xmlns:local="clr-namespace:SqlPackageGui.WPF.Tabs"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top" Margin="0,0,0,5">
-            <Label>Console Path</Label>
-            <TextBox x:Name="tbCmdPath" Text="C:\Users\Administrator\Desktop\150\sqlpackage.exe" Margin="0 0 0 10" />
+            <common:Common x:Name="common"></common:Common>
 
-            <Label>SourceFile</Label>
-            <TextBox x:Name="TbSourceFile" Text="C:\Users\Administrator\Desktop\file.dacpac" />
-            <Label>TargetServerName</Label>
-            <TextBox x:Name="TargetServerName" Text=".\SQLProduction" />
-            <Label>TargetDatabaseName</Label>
-            <TextBox x:Name="TargetDatabaseName" Text="Eshop" />
 
             <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
                 <StackPanel>

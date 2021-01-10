@@ -9,6 +9,34 @@
     <StackPanel>
         <Label>Console Path</Label>
         <!-- , UpdateSourceTrigger=PropertyChanged -->
-        <TextBox x:Name="tbCmdPath" Text="{Binding Path=Console}" Margin="0 0 0 10" />
+        <TextBox x:Name="tbCmdPath" Text="{Binding Path=Connection.Console}" Margin="0 0 0 10" />
+        <GroupBox >
+            <GroupBox.Header>
+                <CheckBox Grid.Row="1" Grid.Column="1" x:Name="CbConnectionString" Content="Use ConnectionString" Checked="CbConnectionString_Checked" Unchecked="CbConnectionString_Checked"></CheckBox>
+            </GroupBox.Header>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" x:Name="LbConnectionString" Visibility="Collapsed">ConnectionString</Label>
+                <TextBox Grid.Row="1" Grid.Column="0" x:Name="TbConnectionString" Text="{Binding Connection.ConnectionString}" Visibility="Collapsed" />
+                <Label Grid.Row="2" Grid.Column="1" x:Name="LbTargetServerName">TargetServerName</Label>
+                <TextBox Grid.Row="3" Grid.Column="1" x:Name="TargetServerName"  Text="{Binding Connection.TargetServer}" />
+                <Label Grid.Row="2" Grid.Column="0" x:Name="LbTargetDatabaseName">TargetDatabaseName</Label>
+                <TextBox Grid.Row="3" Grid.Column="0" x:Name="TargetDatabaseName" Text="{Binding Connection.TargetDatabase}" />
+            </Grid>
+        </GroupBox>
+        <Label>Target (.dacpac)</Label>
+        <TextBox x:Name="TbDacPacPath" Text="{Binding Path=Connection.TargetDacpac}" />
     </StackPanel>
 </UserControl>

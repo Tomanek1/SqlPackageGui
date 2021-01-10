@@ -3,6 +3,7 @@ using System.Diagnostics;
 
 namespace SqlPackageGui.ApplicationLogic
 {
+    ///https://docs.microsoft.com/en-us/sql/tools/sqlpackage?view=sql-server-ver15
     public class SqlPackage
     {
         public string ConsoleLocation { get; set; }
@@ -16,10 +17,11 @@ namespace SqlPackageGui.ApplicationLogic
         public void Execute(string action, string outputPath, string dacpacPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler)
         {
             string arg = "/action:" + action + " "
-                        + "/OutputPath:\"" + outputPath + "\" "
                         + "/p:GenerateSmartDefaults=True "
                         + "/v:DropCategoryAttributeTable=0 "
                         + "/SourceFile:\"" + dacpacPath + "\" ";
+            if (outputPath != null)
+                arg += "/OutputPath:\"" + outputPath + "\" ";
 
             if (!string.IsNullOrEmpty(connection.ConnectionString))
                 //if (CbConnectionString.IsChecked.HasValue && CbConnectionString.IsChecked.Value)

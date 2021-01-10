@@ -4,18 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SqlPackageGui.WPF.Tabs"
+             xmlns:common="clr-namespace:SqlPackageGui.WPF.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Top" Margin="0,0,0,5">
-            <Label>Console Path</Label>
-            <TextBox x:Name="tbCmdPath" Text="C:\Users\Administrator\Desktop\150\sqlpackage.exe" Margin="0 0 0 10" />
-            <Label>Target</Label>
-            <TextBox x:Name="TbDacPacPath" Text="C:\Users\Administrator\Desktop\file.dacpac" />
-            <Label>TargetServerName</Label>
-            <TextBox x:Name="TargetServerName" Text=".\SQLProduction" />
-            <Label>TargetDatabaseName</Label>
-            <TextBox x:Name="TargetDatabaseName" Text="Eshop" />
+            <common:Common x:Name="common"></common:Common>
+
             <Label>OutputPath</Label>
             <TextBox x:Name="OutputPath" Text="C:\\DeployReport.xml" />
             <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
@@ -26,6 +21,6 @@
             </Expander>
             <Button Content="Execute" Click="Btn_DeployReport_Click" />
         </StackPanel>
-        <TextBox VerticalScrollBarVisibility="Visible" x:Name="tbOutput" Height="181"/>
+        <TextBox VerticalScrollBarVisibility="Visible" x:Name="tbOutput" Height="auto" DockPanel.Dock="Bottom"/>
     </DockPanel>
 </UserControl>

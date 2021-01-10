@@ -22,5 +22,30 @@ namespace SqlPackageGui.WPF.UserControls
         {
             InitializeComponent();
         }
+
+        private void CbConnectionString_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CbConnectionString.IsChecked.HasValue && CbConnectionString.IsChecked.Value)
+            {
+                TargetDatabaseName.Visibility = Visibility.Collapsed;
+                LbTargetDatabaseName.Visibility = Visibility.Collapsed;
+                TargetServerName.Visibility = Visibility.Collapsed;
+                LbTargetServerName.Visibility = Visibility.Collapsed;
+
+                TbConnectionString.Visibility = Visibility.Visible;
+                LbConnectionString.Visibility = Visibility.Visible;
+            }
+            else
+            {
+
+                TargetDatabaseName.Visibility = Visibility.Visible;
+                LbTargetDatabaseName.Visibility = Visibility.Visible;
+                TargetServerName.Visibility = Visibility.Visible;
+                LbTargetServerName.Visibility = Visibility.Visible;
+
+                TbConnectionString.Visibility = Visibility.Collapsed;
+                LbConnectionString.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }

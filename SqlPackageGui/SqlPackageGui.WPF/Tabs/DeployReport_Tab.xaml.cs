@@ -30,12 +30,12 @@ namespace SqlPackageGui.WPF.Tabs
         private void Btn_DeployReport_Click(object sender, RoutedEventArgs e)
         {
             proc = new Process();
-            string act = tbCmdPath.Text;
+            string act = common.tbCmdPath.Text;
             string arg = "/action:DeployReport "
                         + "/OutputPath:" + OutputPath.Text + " "
-                        + "/SourceFile:" + TbDacPacPath.Text + " "
-                        + "/TargetDatabaseName:" + TargetDatabaseName.Text + " "
-                        + "/TargetServerName:" + TargetServerName.Text;
+                        + "/SourceFile:" + common.TbDacPacPath.Text + " "
+                        + "/TargetDatabaseName:" + common.TargetDatabaseName.Text + " "
+                        + "/TargetServerName:" + common.TargetServerName.Text;
 
             this.proc.StartInfo = new ProcessStartInfo
             {

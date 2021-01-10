@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlPackageGui.ApplicationLogic;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -19,7 +20,7 @@ namespace SqlPackageGui.WPF.Tabs
     /// </summary>
     public partial class Publish_Tab : UserControl
     {
-        Process proc = new Process();
+        SqlPackage sqlPackage = new SqlPackage();
 
         public Publish_Tab()
         {
@@ -28,44 +29,19 @@ namespace SqlPackageGui.WPF.Tabs
 
         private void Btn_Publish_Click(object sender, RoutedEventArgs e)
         {
-            proc = new Process();
-            string act = tbCmdPath.Text;
-            string arg = "/action:Publish "
-                        + "/SourceFile:" + TbSourceFile.Text + " "
-                        //+ "/p:GenerateSmartDefaults=True "
-                        + "/TargetDatabaseName:" + TargetDatabaseName.Text + " "
-                        + "/TargetServerName:" + TargetServerName.Text;
+            sqlPackage.ConsoleLocation = common.tbCmdPath.Text;
+            //proc = new Process();
+            Connection conn = new Connection();
+            if (common.CbConnectionString.IsChecked.HasValue && common.CbConnectionString.IsChecked.Value)
+                conn.ConnectionString = common.TbConnectionString.Text;
+            conn.TargetDatabaseName = common.TargetDatabaseName.Text;
+            conn.TargetServerName = common.TargetServerName.Text;
 
-            this.proc.StartInfo = new ProcessStartInfo
-            {
-                FileName = act,
-                Arguments = arg,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardInput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true
-            };
+            sqlPackage.Execute("Script", null, common.TbDacPacPath.Text, conn, Proc_ErrorDataReceived);
 
-            proc.OutputDataReceived += new DataReceivedEventHandler(this.Proc_OutputDataReceived);
-            proc.ErrorDataReceived += new DataReceivedEventHandler(this.Proc_ErrorDataReceived);
-
-            proc.Start();
-            proc.BeginOutputReadLine();
-            proc.BeginErrorReadLine();
-            proc.WaitForExit();
         }
 
         private void Proc_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            tbOutput.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                var value = (e.Data ?? "") + Environment.NewLine;
-                tbOutput.AppendText(value);
-            }));
-        }
-
-        private void Proc_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             tbOutput.Dispatcher.BeginInvoke(new Action(() =>
             {
