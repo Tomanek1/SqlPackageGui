@@ -12,7 +12,7 @@
             <common:Common x:Name="common"></common:Common>
 
             <Label>OutputPath</Label>
-            <TextBox x:Name="OutputPath" Text="C:\\DeployReport.xml" />
+            <TextBox x:Name="OutputPath" Text="{Binding Path=OutputPath}" />
             <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
                 <StackPanel>
                     <Label>Optional param 1</Label>
