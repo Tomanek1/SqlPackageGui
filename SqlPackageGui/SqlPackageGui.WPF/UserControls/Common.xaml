@@ -38,5 +38,26 @@
         </GroupBox>
         <Label>Target (.dacpac)</Label>
         <TextBox x:Name="TbDacPacPath" Text="{Binding Path=Connection.TargetDacpac}" />
+
+
+        <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="176" Text="{Binding Variables.Key}" x:Name="v1"></TextBox>
+                <TextBox Width="176" Text="{Binding Variables.Value}" x:Name="v2"></TextBox>
+
+                <!--<ListBox  ItemsSource="{Binding Path=Variables}"  SelectedValuePath="Value" SelectedValue="{Binding Path=SelectedBookIndex}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Black" BorderThickness="2">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Path=Value}" />
+                                    <TextBlock Text="{Binding Path=Key.Name}" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>-->
+            </StackPanel>
+        </Expander>
     </StackPanel>
 </UserControl>

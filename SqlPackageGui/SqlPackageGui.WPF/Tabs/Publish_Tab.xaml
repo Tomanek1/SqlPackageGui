@@ -11,13 +11,6 @@
         <StackPanel DockPanel.Dock="Top" Margin="0,0,0,5">
             <common:Common x:Name="common"></common:Common>
 
-
-            <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
-                <StackPanel>
-                    <Label>Optional param 1</Label>
-                    <TextBox Text="Val" />
-                </StackPanel>
-            </Expander>
             <Button Content="Execute" Click="Btn_Publish_Click" />
         </StackPanel>
         <TextBox VerticalScrollBarVisibility="Visible" x:Name="tbOutput" />

@@ -13,13 +13,9 @@
 
             <Label>OutputPath</Label>
             <TextBox x:Name="OutputPath" Text="{Binding Path=OutputPath}" />
-            <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
-                <StackPanel>
-                    <Label>Optional param 1</Label>
-                    <TextBox Text="Val" />
-                </StackPanel>
-            </Expander>
-            <Button Content="Execute" Click="Btn_DeployReport_Click" />
+
+            <Button x:Name="BtnExecute" Content="Execute" Click="Btn_DeployReport_Click" />
+            <Button x:Name="BtnOpenFile" Content="Open" Click="BtnOpenFile_Click" Width="100" IsEnabled="False" />
         </StackPanel>
         <TextBox VerticalScrollBarVisibility="Visible" x:Name="tbOutput" Height="auto" DockPanel.Dock="Bottom"/>
     </DockPanel>

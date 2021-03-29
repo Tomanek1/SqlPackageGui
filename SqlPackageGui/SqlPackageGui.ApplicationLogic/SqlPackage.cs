@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SqlPackageGui.ApplicationLogic.Models;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace SqlPackageGui.ApplicationLogic
@@ -12,14 +14,24 @@ namespace SqlPackageGui.ApplicationLogic
             //ConsoleLocation = location;
         }
 
-        Process proc = new Process();
+        Process proc;
 
         public void Execute(string action, string outputPath, string dacpacPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler)
         {
+            Execute(action, outputPath, dacpacPath, connection, dataReceivedEventHandler, new MyVariableList());
+        }
+
+        public void Execute(string action, string outputPath, string dacpacPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler, MyVariableList custParams)
+        {
             string arg = "/action:" + action + " "
                         + "/p:GenerateSmartDefaults=True "
-                        + "/v:DropCategoryAttributeTable=0 "
                         + "/SourceFile:\"" + dacpacPath + "\" ";
+
+            //foreach (var item in custParams)
+            //{
+            arg += "/v:" + custParams.Key + "=" + custParams.Value + " ";
+            //}
+
             if (outputPath != null)
                 arg += "/OutputPath:\"" + outputPath + "\" ";
 
@@ -30,25 +42,31 @@ namespace SqlPackageGui.ApplicationLogic
                 arg += "/TargetDatabaseName:" + connection.TargetDatabaseName + " "
                         + "/TargetServerName:" + connection.TargetServerName;
 
-            this.proc.StartInfo = new ProcessStartInfo
+            using (proc = new Process())
             {
-                FileName = ConsoleLocation,
-                Arguments = arg,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardInput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true
-            };
 
-            proc.OutputDataReceived += new DataReceivedEventHandler(dataReceivedEventHandler);
-            proc.ErrorDataReceived += new DataReceivedEventHandler(dataReceivedEventHandler);
+                this.proc.StartInfo = new ProcessStartInfo
+                {
+                    FileName = ConsoleLocation,
+                    Arguments = arg,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardInput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                };
 
-            proc.Start();
-            proc.BeginOutputReadLine();
-            proc.BeginErrorReadLine();
-            proc.WaitForExit();
 
+                proc.OutputDataReceived += new DataReceivedEventHandler(dataReceivedEventHandler);
+                proc.ErrorDataReceived += new DataReceivedEventHandler(dataReceivedEventHandler);
+
+                proc.Start();
+
+                proc.BeginOutputReadLine();
+                proc.BeginErrorReadLine();
+
+                proc.WaitForExit();
+            }
         }
     }
 }

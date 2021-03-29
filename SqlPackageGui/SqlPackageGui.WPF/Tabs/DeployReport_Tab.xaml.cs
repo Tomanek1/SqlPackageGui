@@ -1,4 +1,5 @@
 ﻿using SqlPackageGui.ApplicationLogic;
+using SqlPackageGui.ApplicationLogic.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -32,13 +33,19 @@ namespace SqlPackageGui.WPF.Tabs
         {
             sqlPackage.ConsoleLocation = common.tbCmdPath.Text;
             Connection conn = new Connection();
+            MyVariableList var = new MyVariableList(common.v1.Text, common.v2.Text);
             if (common.CbConnectionString.IsChecked.HasValue && common.CbConnectionString.IsChecked.Value)
                 conn.ConnectionString = common.TbConnectionString.Text;
             conn.TargetDatabaseName = common.TargetDatabaseName.Text;
             conn.TargetServerName = common.TargetServerName.Text;
 
-            sqlPackage.Execute("DeployReport", OutputPath.Text, common.TbDacPacPath.Text, conn, Proc_DataReceived);
+            sqlPackage.Execute("DeployReport", OutputPath.Text, common.TbDacPacPath.Text, conn, Proc_DataReceived,var);
+            BtnOpenFile.IsEnabled = true;
+        }
 
+        private void BtnOpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            //Process.Start()
         }
 
         private void Proc_DataReceived(object sender, DataReceivedEventArgs e)
@@ -49,5 +56,6 @@ namespace SqlPackageGui.WPF.Tabs
                 tbOutput.AppendText(value);
             }));
         }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using SqlPackageGui.ApplicationLogic;
+using SqlPackageGui.ApplicationLogic.Models;
 
 namespace SqlPackageGui.WPF.Tabs
 {
@@ -23,12 +24,13 @@ namespace SqlPackageGui.WPF.Tabs
             sqlPackage.ConsoleLocation = common.tbCmdPath.Text;
             //proc = new Process();
             Connection conn = new Connection();
+            MyVariableList var = new MyVariableList(common.v1.Text, common.v2.Text);
             if (common.CbConnectionString.IsChecked.HasValue && common.CbConnectionString.IsChecked.Value)
                 conn.ConnectionString = common.TbConnectionString.Text;
             conn.TargetDatabaseName = common.TargetDatabaseName.Text;
             conn.TargetServerName = common.TargetServerName.Text;
 
-            sqlPackage.Execute("Script", OutputPath.Text, common.TbDacPacPath.Text, conn, Proc_ErrorDataReceived);
+            sqlPackage.Execute("Script", OutputPath.Text, common.TbDacPacPath.Text, conn, Proc_ErrorDataReceived, var);
         }
 
         private void Proc_ErrorDataReceived(object sender, DataReceivedEventArgs e)
