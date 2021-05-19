@@ -16,16 +16,17 @@ namespace SqlPackageGui.ApplicationLogic
 
         Process proc;
 
-        public void Execute(string action, string outputPath, string dacpacPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler)
+        public void Execute(CommonParameters parameters, string outputPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler)
         {
-            Execute(action, outputPath, dacpacPath, connection, dataReceivedEventHandler, new MyVariableList());
+            Execute(parameters, outputPath, connection, dataReceivedEventHandler, new MyVariableList());
         }
 
-        public void Execute(string action, string outputPath, string dacpacPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler, MyVariableList custParams)
+        public void Execute(CommonParameters parameters, string outputPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler, MyVariableList custParams)
         {
-            string arg = "/action:" + action + " "
+            string arg = "/action:" + parameters.Action + " "
                         + "/p:GenerateSmartDefaults=True "
-                        + "/SourceFile:\"" + dacpacPath + "\" ";
+                        + "/p:IgnoreColumnOrder=" + parameters.IgnoreColumnOrder + " "
+                        + "/SourceFile:\"" + parameters.DacpacPath + "\" ";
 
             //foreach (var item in custParams)
             //{

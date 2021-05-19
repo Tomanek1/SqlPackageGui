@@ -39,7 +39,8 @@ namespace SqlPackageGui.WPF.Tabs
             conn.TargetDatabaseName = common.TargetDatabaseName.Text;
             conn.TargetServerName = common.TargetServerName.Text;
 
-            sqlPackage.Execute("DeployReport", OutputPath.Text, common.TbDacPacPath.Text, conn, Proc_DataReceived,var);
+            var model = new CommonParameters() { Action = "DeployReport", DacpacPath = common.TbDacPacPath.Text, };
+            sqlPackage.Execute(model, OutputPath.Text, conn, Proc_DataReceived, var);
             BtnOpenFile.IsEnabled = true;
         }
 
