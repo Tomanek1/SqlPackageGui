@@ -3,9 +3,7 @@
   <PropertyGroup>
     <Version>1.1.0</Version>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <!--Pokud je zadán, automaticky nastaví SelfContained na true -->
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
@@ -15,6 +13,11 @@
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
   </PropertyGroup>
 
+  <PropertyGroup Label="...Release">
+    <!--Pokud je zadán, automaticky nastaví SelfContained na true -->
+    <!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
+  </PropertyGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\SqlPackageGui.ApplicationLogic\SqlPackageGui.ApplicationLogic.csproj" />
   </ItemGroup>

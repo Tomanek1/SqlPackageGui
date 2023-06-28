@@ -26,6 +26,7 @@ namespace SqlPackageGui.ApplicationLogic
             string arg = "/action:" + parameters.Action + " "
                         + "/p:GenerateSmartDefaults=True "
                         + "/p:IgnoreColumnOrder=" + parameters.IgnoreColumnOrder + " "
+                        + "/p:BlockOnPossibleDataLoss=" + parameters.BlockOnPossibleDataLoss + " "
                         + "/SourceFile:\"" + parameters.DacpacPath + "\" ";
 
             //foreach (var item in custParams)
@@ -41,7 +42,9 @@ namespace SqlPackageGui.ApplicationLogic
                 arg += "/TargetConnectionString:" + connection.ConnectionString + " ";
             else
                 arg += "/TargetDatabaseName:" + connection.TargetDatabaseName + " "
-                        + "/TargetServerName:" + connection.TargetServerName;
+                        + "/TargetServerName:" + connection.TargetServerName + " "
+                        + "/stsc:True "
+                        + "/ttsc:True";
 
             using (proc = new Process())
             {

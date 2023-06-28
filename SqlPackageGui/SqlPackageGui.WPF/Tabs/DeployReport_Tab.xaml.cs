@@ -1,18 +1,9 @@
 ﻿using SqlPackageGui.ApplicationLogic;
 using SqlPackageGui.ApplicationLogic.Models;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SqlPackageGui.WPF.Tabs
 {
@@ -39,7 +30,12 @@ namespace SqlPackageGui.WPF.Tabs
             conn.TargetDatabaseName = common.TargetDatabaseName.Text;
             conn.TargetServerName = common.TargetServerName.Text;
 
-            var model = new CommonParameters() { Action = "DeployReport", DacpacPath = common.TbDacPacPath.Text, };
+            var model = new CommonParameters()
+            {
+                Action = "DeployReport",
+                DacpacPath = common.TbDacPacPath.Text,
+                BlockOnPossibleDataLoss = common.BlockOnPossibleDataLoss.IsChecked.Value
+            };
             sqlPackage.Execute(model, OutputPath.Text, conn, Proc_DataReceived, var);
             BtnOpenFile.IsEnabled = true;
         }

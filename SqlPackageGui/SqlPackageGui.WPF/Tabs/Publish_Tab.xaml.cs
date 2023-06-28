@@ -1,18 +1,9 @@
 ﻿using SqlPackageGui.ApplicationLogic;
 using SqlPackageGui.ApplicationLogic.Models;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SqlPackageGui.WPF.Tabs
 {
@@ -31,7 +22,6 @@ namespace SqlPackageGui.WPF.Tabs
         private void Btn_Publish_Click(object sender, RoutedEventArgs e)
         {
             sqlPackage.ConsoleLocation = common.tbCmdPath.Text;
-            //proc = new Process();
             Connection conn = new Connection();
             MyVariableList var = new MyVariableList(common.v1.Text, common.v2.Text);
             if (common.CbConnectionString.IsChecked.HasValue && common.CbConnectionString.IsChecked.Value)
@@ -39,7 +29,13 @@ namespace SqlPackageGui.WPF.Tabs
             conn.TargetDatabaseName = common.TargetDatabaseName.Text;
             conn.TargetServerName = common.TargetServerName.Text;
 
-            var model = new CommonParameters() { Action = "Publish", DacpacPath = common.TbDacPacPath.Text, };
+            var model = new CommonParameters()
+            {
+                Action = "Publish",
+                DacpacPath = common.TbDacPacPath.Text,
+                BlockOnPossibleDataLoss = common.BlockOnPossibleDataLoss.IsChecked.Value
+            };
+
             sqlPackage.Execute(model, null, conn, Proc_ErrorDataReceived, var);
 
         }

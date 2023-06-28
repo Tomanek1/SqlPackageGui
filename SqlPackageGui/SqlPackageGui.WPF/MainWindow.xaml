@@ -15,9 +15,13 @@
         </Style>
     </Window.Resources>
     <DockPanel LastChildFill="True">
-        <!-- https://docs.microsoft.com/en-us/sql/tools/sqlpackage?view=sql-server-ver15 -->
+        <!--  -->
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="4">
-            <TabItem IsEnabled="False" Header="Actions : ">
+            <TabItem IsEnabled="True" Header="Actions : ">
+                <TabItem.Content>
+                    <!--  HorizontalAlignment="Center" VerticalAlignment="Center" -->
+                    <Hyperlink NavigateUri="https://docs.microsoft.com/en-us/sql/tools/sqlpackage?view=sql-server-ver15" FontSize="16" >Link to resources</Hyperlink>
+                </TabItem.Content>
             </TabItem>
             <TabItem x:Name="tbScript" Header="Script">
                 <tab:Script_Tab DataContext="{Binding TabScriptVm}"></tab:Script_Tab>

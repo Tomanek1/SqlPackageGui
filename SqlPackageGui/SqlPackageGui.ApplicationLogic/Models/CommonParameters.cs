@@ -12,5 +12,6 @@ namespace SqlPackageGui.ApplicationLogic.Models
         public string Action { get; set; }
         public string DacpacPath { get; set; }
         public bool IgnoreColumnOrder { get; set; }
+        public bool BlockOnPossibleDataLoss { get; set; }
     }
 }
