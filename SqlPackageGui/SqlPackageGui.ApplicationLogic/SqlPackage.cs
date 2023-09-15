@@ -1,5 +1,4 @@
 ﻿using SqlPackageGui.ApplicationLogic.Models;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -18,10 +17,10 @@ namespace SqlPackageGui.ApplicationLogic
 
         public void Execute(CommonParameters parameters, string outputPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler)
         {
-            Execute(parameters, outputPath, connection, dataReceivedEventHandler, new MyVariableList());
+            Execute(parameters, outputPath, connection, dataReceivedEventHandler, new Dictionary<string, VariableItem>());
         }
 
-        public void Execute(CommonParameters parameters, string outputPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler, MyVariableList custParams)
+        public void Execute(CommonParameters parameters, string outputPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler, IDictionary<string, VariableItem> custParams)
         {
             string arg = "/action:" + parameters.Action + " "
                         + "/p:GenerateSmartDefaults=True "
@@ -29,10 +28,11 @@ namespace SqlPackageGui.ApplicationLogic
                         + "/p:BlockOnPossibleDataLoss=" + parameters.BlockOnPossibleDataLoss + " "
                         + "/SourceFile:\"" + parameters.DacpacPath + "\" ";
 
-            //foreach (var item in custParams)
-            //{
-            arg += "/v:" + custParams.Key + "=" + custParams.Value + " ";
-            //}
+            if (custParams.TryGetValue("V", out var variable) && !string.IsNullOrEmpty(variable.Key) && !string.IsNullOrEmpty(variable.Value))
+                arg += "/v:" + variable.Key + "=" + variable.Value + " ";
+
+            if (custParams.TryGetValue("P", out var parameter) && !string.IsNullOrEmpty(parameter.Key) && !string.IsNullOrEmpty(parameter.Value))
+                arg += "/p:" + parameter.Key + "=" + parameter.Value + " ";
 
             if (outputPath != null)
                 arg += "/OutputPath:\"" + outputPath + "\" ";

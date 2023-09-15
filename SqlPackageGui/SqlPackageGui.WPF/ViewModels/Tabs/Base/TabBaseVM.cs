@@ -1,17 +1,21 @@
-﻿using SqlPackageGui.ApplicationLogic;
-using SqlPackageGui.ApplicationLogic.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SqlPackageGui.ApplicationLogic.Models;
 using System.Xml.Serialization;
 
 namespace SqlPackageGui.WPF.ViewModels.Tabs.Base
 {
     public class TabBaseVM
     {
-
+        /// <summary>
+        /// /v:xxx
+        /// </summary>
         [XmlIgnore]
-        public MyVariableList Variables { get; set; }
+        public VariableItem Variables { get; set; }
+
+        /// <summary>
+        /// /p:xxx
+        /// </summary>
+        [XmlIgnore]
+        public VariableItem Parameters { get; set; }
 
 
         [XmlIgnore]

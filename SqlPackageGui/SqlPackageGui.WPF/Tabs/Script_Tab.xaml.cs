@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,14 +25,22 @@ namespace SqlPackageGui.WPF.Tabs
             sqlPackage.ConsoleLocation = common.tbCmdPath.Text;
             //proc = new Process();
             Connection conn = new Connection();
-            MyVariableList var = new MyVariableList(common.v1.Text, common.v2.Text);
+            VariableItem var1 = new VariableItem(common.v1.Text, common.v2.Text);
+            VariableItem var2 = new VariableItem(common.p1.Text, common.p2.Text);
             if (common.CbConnectionString.IsChecked.HasValue && common.CbConnectionString.IsChecked.Value)
                 conn.ConnectionString = common.TbConnectionString.Text;
             conn.TargetDatabaseName = common.TargetDatabaseName.Text;
             conn.TargetServerName = common.TargetServerName.Text;
 
             var model = new CommonParameters() { Action = "Script", DacpacPath = common.TbDacPacPath.Text, };
-            sqlPackage.Execute(model, OutputPath.Text, conn, Proc_ErrorDataReceived, var);
+
+
+            var dic = new Dictionary<string, VariableItem>()
+            {
+                { "V", var1 },
+                { "P", var2 },
+            };
+            sqlPackage.Execute(model, OutputPath.Text, conn, Proc_ErrorDataReceived, dic);
         }
 
         private void Proc_ErrorDataReceived(object sender, DataReceivedEventArgs e)

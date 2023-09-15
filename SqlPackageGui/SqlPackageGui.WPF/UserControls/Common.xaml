@@ -40,26 +40,23 @@
         <TextBox x:Name="TbDacPacPath" Text="{Binding Path=Connection.TargetDacpac}" />
 
 
-        <Expander IsExpanded="False" Header="Optional parameters" Margin="0 10 0 10">
+        <Expander IsExpanded="False" Header="Optional variable" Margin="0 10 0 10">
             <StackPanel Orientation="Horizontal">
+                <Label>/v:</Label>
                 <TextBox Width="176" Text="{Binding Variables.Key}" x:Name="v1"></TextBox>
+                <Label>=</Label>
                 <TextBox Width="176" Text="{Binding Variables.Value}" x:Name="v2"></TextBox>
-
-                <!--<ListBox  ItemsSource="{Binding Path=Variables}"  SelectedValuePath="Value" SelectedValue="{Binding Path=SelectedBookIndex}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="Black" BorderThickness="2">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Path=Value}" />
-                                    <TextBlock Text="{Binding Path=Key.Name}" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>-->
+            </StackPanel>
+        </Expander>
+        <Expander IsExpanded="False" Header="Optional parameter" Margin="0 10 0 10">
+            <StackPanel Orientation="Horizontal">
+                <Label>/p:</Label>
+                <TextBox Width="176" Text="{Binding Parameters.Key}" x:Name="p1"></TextBox>
+                <Label>=</Label>
+                <TextBox Width="176" Text="{Binding Parameters.Value}" x:Name="p2"></TextBox>
             </StackPanel>
         </Expander>
         <Label>BlockOnPossible data loss</Label>
-        <CheckBox x:Name="BlockOnPossibleDataLoss">/p:BlockOnPossibleDataLoss=false</CheckBox>
+        <CheckBox x:Name="BlockOnPossibleDataLoss" IsChecked="True">/p:BlockOnPossibleDataLoss</CheckBox>
     </StackPanel>
 </UserControl>

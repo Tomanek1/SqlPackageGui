@@ -1,9 +1,6 @@
 ﻿using SqlPackageGui.ApplicationLogic.Models;
 using SqlPackageGui.WPF.ViewModels.Tabs.Base;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Serialization;
 
 namespace SqlPackageGui.WPF.ViewModels.Tabs
 {
@@ -19,7 +16,7 @@ namespace SqlPackageGui.WPF.ViewModels.Tabs
             //Execute = new BasicCommand(this.Executee);
         }
 
-        public TabPublishVM(Connection connection, MyVariableList valuePairs)
+        public TabPublishVM(Connection connection, VariableItem valuePairs)
         {
             this.Connection = connection;
             //Execute = new BasicCommand(this.Executee);

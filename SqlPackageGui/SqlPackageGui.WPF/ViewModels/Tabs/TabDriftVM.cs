@@ -18,7 +18,7 @@ namespace SqlPackageGui.WPF.ViewModels.Tabs
             //Execute = new BasicCommand(this.Executee);
         }
 
-        public TabDriftVM(Connection connection, MyVariableList valuePairs)
+        public TabDriftVM(Connection connection, VariableItem valuePairs)
         {
             this.Connection = connection;
             //Execute = new BasicCommand(this.Executee);

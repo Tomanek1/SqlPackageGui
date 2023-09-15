@@ -18,7 +18,7 @@ namespace SqlPackageGui.WPF.ViewModels.Tabs
             //Execute = new BasicCommand(this.Executee);
         }
 
-        public TabDeployReportVM(Connection connection, MyVariableList valuePairs)
+        public TabDeployReportVM(Connection connection, VariableItem valuePairs)
         {
             this.Connection = connection;
             //Execute = new BasicCommand(this.Executee);
