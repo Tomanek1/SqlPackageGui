@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SqlPackageGui.ApplicationLogic.Models
+﻿namespace SqlPackageGui.ApplicationLogic.Models
 {
     /// <summary>
     /// Třída s parametry pro základní nastavení SqlConsole

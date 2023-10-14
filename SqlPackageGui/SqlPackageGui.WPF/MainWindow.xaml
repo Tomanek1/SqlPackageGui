@@ -32,9 +32,6 @@
             <TabItem x:Name="tbDeployReport" Header="DeployReport">
                 <tab:DeployReport_Tab DataContext="{Binding TabDeployReport}"></tab:DeployReport_Tab>
             </TabItem>
-            <TabItem x:Name="tbDriftReport" Header="DriftReport">
-                <tab:Drift_Tab DataContext="{Binding TabDriftVM}"></tab:Drift_Tab>
-            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>

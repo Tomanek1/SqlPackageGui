@@ -34,8 +34,9 @@ namespace SqlPackageGui.WPF.Tabs
             var model = new CommonParameters()
             {
                 Action = "Publish",
+                BlockOnPossibleDataLoss = common.BlockOnPossibleDataLoss.IsChecked.Value,
                 DacpacPath = common.TbDacPacPath.Text,
-                BlockOnPossibleDataLoss = common.BlockOnPossibleDataLoss.IsChecked.Value
+                IgnoreColumnOrder = common.IgnoreColumnOrder.IsChecked.Value,
             };
 
             var dic = new Dictionary<string, VariableItem>()

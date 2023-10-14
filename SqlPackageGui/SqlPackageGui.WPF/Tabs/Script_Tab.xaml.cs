@@ -32,7 +32,13 @@ namespace SqlPackageGui.WPF.Tabs
             conn.TargetDatabaseName = common.TargetDatabaseName.Text;
             conn.TargetServerName = common.TargetServerName.Text;
 
-            var model = new CommonParameters() { Action = "Script", DacpacPath = common.TbDacPacPath.Text, };
+            var model = new CommonParameters()
+            {
+                Action = "Script",
+                BlockOnPossibleDataLoss = common.BlockOnPossibleDataLoss.IsChecked.Value,
+                DacpacPath = common.TbDacPacPath.Text,
+                IgnoreColumnOrder = common.IgnoreColumnOrder.IsChecked.Value,
+            };
 
 
             var dic = new Dictionary<string, VariableItem>()
