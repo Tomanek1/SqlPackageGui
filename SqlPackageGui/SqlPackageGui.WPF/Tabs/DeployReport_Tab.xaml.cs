@@ -1,4 +1,5 @@
-﻿using SqlPackageGui.ApplicationLogic;
+﻿using Microsoft.Extensions.Logging;
+using SqlPackageGui.ApplicationLogic;
 using SqlPackageGui.ApplicationLogic.Models;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,12 @@ namespace SqlPackageGui.WPF.Tabs
     /// </summary>
     public partial class DeployReport_Tab : UserControl
     {
-        SqlPackage sqlPackage = new SqlPackage();
+        SqlPackage sqlPackage;
 
         public DeployReport_Tab()
         {
             InitializeComponent();
+            sqlPackage = new SqlPackage(LoggerFactory.Create(builder => builder.AddEventLog()).CreateLogger("Log"));
         }
 
 

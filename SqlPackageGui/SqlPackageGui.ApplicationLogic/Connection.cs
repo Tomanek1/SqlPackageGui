@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SqlPackageGui.ApplicationLogic
+﻿namespace SqlPackageGui.ApplicationLogic
 {
     public class Connection
     {

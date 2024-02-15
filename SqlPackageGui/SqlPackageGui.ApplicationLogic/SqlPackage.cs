@@ -1,4 +1,5 @@
-﻿using SqlPackageGui.ApplicationLogic.Models;
+﻿using Microsoft.Extensions.Logging;
+using SqlPackageGui.ApplicationLogic.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -8,12 +9,14 @@ namespace SqlPackageGui.ApplicationLogic
     public class SqlPackage
     {
         public string ConsoleLocation { get; set; }
-        public SqlPackage(/*string location*/)
+
+        public SqlPackage(ILogger logger)
         {
-            //ConsoleLocation = location;
+            this.logger = logger;
         }
 
-        Process proc;
+        private Process proc;
+        private readonly ILogger logger;
 
         public void Execute(CommonParameters parameters, string outputPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler)
         {
@@ -22,26 +25,26 @@ namespace SqlPackageGui.ApplicationLogic
 
         public void Execute(CommonParameters parameters, string outputPath, Connection connection, DataReceivedEventHandler dataReceivedEventHandler, IDictionary<string, VariableItem> custParams)
         {
-            string arg = "/action:" + parameters.Action + " "
+            string args = "/action:" + parameters.Action + " "
                         + "/p:GenerateSmartDefaults=True "
                         + "/p:IgnoreColumnOrder=" + parameters.IgnoreColumnOrder + " "
                         + "/p:BlockOnPossibleDataLoss=" + parameters.BlockOnPossibleDataLoss + " "
                         + "/SourceFile:\"" + parameters.DacpacPath + "\" ";
 
             if (custParams.TryGetValue("V", out var variable) && !string.IsNullOrEmpty(variable.Key) && !string.IsNullOrEmpty(variable.Value))
-                arg += "/v:" + variable.Key + "=" + variable.Value + " ";
+                args += "/v:" + variable.Key + "=" + variable.Value + " ";
 
             if (custParams.TryGetValue("P", out var parameter) && !string.IsNullOrEmpty(parameter.Key) && !string.IsNullOrEmpty(parameter.Value))
-                arg += "/p:" + parameter.Key + "=" + parameter.Value + " ";
+                args += "/p:" + parameter.Key + "=" + parameter.Value + " ";
 
             if (outputPath != null)
-                arg += "/OutputPath:\"" + outputPath + "\" ";
+                args += "/OutputPath:\"" + outputPath + "\" ";
 
             if (!string.IsNullOrEmpty(connection.ConnectionString))
                 //if (CbConnectionString.IsChecked.HasValue && CbConnectionString.IsChecked.Value)
-                arg += "/TargetConnectionString:" + connection.ConnectionString + " ";
+                args += "/TargetConnectionString:" + connection.ConnectionString + " ";
             else
-                arg += "/TargetDatabaseName:" + connection.TargetDatabaseName + " "
+                args += "/TargetDatabaseName:" + connection.TargetDatabaseName + " "
                         + "/TargetServerName:" + connection.TargetServerName + " "
                         + "/stsc:True "
                         + "/ttsc:True";
@@ -52,7 +55,7 @@ namespace SqlPackageGui.ApplicationLogic
                 this.proc.StartInfo = new ProcessStartInfo
                 {
                     FileName = ConsoleLocation,
-                    Arguments = arg,
+                    Arguments = args,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardInput = true,
@@ -64,6 +67,7 @@ namespace SqlPackageGui.ApplicationLogic
                 proc.OutputDataReceived += new DataReceivedEventHandler(dataReceivedEventHandler);
                 proc.ErrorDataReceived += new DataReceivedEventHandler(dataReceivedEventHandler);
 
+                logger.LogInformation("Starting process with args: {args}", args);
                 proc.Start();
 
                 proc.BeginOutputReadLine();

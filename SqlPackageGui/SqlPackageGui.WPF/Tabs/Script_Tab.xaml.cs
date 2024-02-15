@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Extensions.Logging;
 using SqlPackageGui.ApplicationLogic;
 using SqlPackageGui.ApplicationLogic.Models;
 
@@ -13,11 +14,12 @@ namespace SqlPackageGui.WPF.Tabs
     /// </summary>
     public partial class Script_Tab : UserControl
     {
-        //Process proc = new Process();
-        SqlPackage sqlPackage = new SqlPackage();
+        private SqlPackage sqlPackage;
+
         public Script_Tab()
         {
             InitializeComponent();
+            sqlPackage = new SqlPackage(LoggerFactory.Create(builder => builder.AddEventLog()).CreateLogger("Log"));
         }
 
         private void Btn_Script_Click(object sender, RoutedEventArgs e)

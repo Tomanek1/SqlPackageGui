@@ -11,8 +11,9 @@ namespace SqlPackageGui.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        WindowVM window;
-        string serializationFile = @"C:\\sqlconsolegui\data.xml";
+        private WindowVM window;
+        private string serializationFile = @"C:\\sqlconsolegui\data.xml";
+
         public MainWindow()
         {
             InitializeComponent();
